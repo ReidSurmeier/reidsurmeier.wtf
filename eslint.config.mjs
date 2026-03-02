@@ -12,10 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
-    // Vendored third-party libraries:
-    "lib/**",
+    // Archive and vendored files:
+    "_archive/**",
     "public/**/*.min.js",
-    "anseki-leader-line-*/**",
   ]),
 ]);
 

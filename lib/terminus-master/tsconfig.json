@@ -1,5 +1,0 @@
-{
-  "extends": "./tsconfig.base.json",
-  "include": ["lib/**/*", "e2e/**/*", "tools/**/*"],
-  "exclude": ["node_modules", "sample/**/*.ts"]
-}
