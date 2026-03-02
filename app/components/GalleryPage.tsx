@@ -672,10 +672,10 @@ function ExhibitionPage({ lang, images, captions, aboutTexts, processImages, bou
   return (
     <div>
       {/* Divider */}
-      <div style={{ borderBottom: "1px solid #eee", marginBottom: 10 }} />
+      <div style={{ borderBottom: "1px solid #eee", marginBottom: 10, marginLeft: 15, marginRight: 15 }} />
 
       {/* Hero image with navigation arrows */}
-      <div style={{ position: "relative", marginBottom: 10, marginLeft: -15, marginRight: -15 }}>
+      <div style={{ position: "relative", marginBottom: 10 }}>
         {/* Main image */}
         <div
           onClick={() => setFullscreen(true)}
@@ -766,6 +766,7 @@ function ExhibitionPage({ lang, images, captions, aboutTexts, processImages, bou
         alignItems: "center",
         gap: 12,
         marginBottom: 8,
+        padding: "0 15px",
         fontFamily: "var(--site-font)",
         fontSize: 9,
         color: "#bbb",
@@ -823,7 +824,7 @@ function ExhibitionPage({ lang, images, captions, aboutTexts, processImages, bou
       </div>
 
       {/* Caption */}
-      <div style={{ marginBottom: 8, fontFamily: "var(--site-font)" }}>
+      <div style={{ marginBottom: 8, padding: "0 15px", fontFamily: "var(--site-font)" }}>
         <div style={{ fontSize: 10, color: "#000" }}>
           <span style={{ fontStyle: "italic" }}>{caption.title}</span>, {caption.date}
         </div>
@@ -840,6 +841,7 @@ function ExhibitionPage({ lang, images, captions, aboutTexts, processImages, bou
         display: "flex",
         gap: 4,
         marginBottom: 16,
+        padding: "0 15px",
         overflowX: "auto",
       }}>
         {images.map((src, i) => (
@@ -875,12 +877,13 @@ function ExhibitionPage({ lang, images, captions, aboutTexts, processImages, bou
 
 
       {/* Tab navigation */}
-      <div style={{ borderTop: "1px solid #eee", marginBottom: 0 }} />
+      <div style={{ borderTop: "1px solid #eee", marginBottom: 0, marginLeft: 15, marginRight: 15 }} />
       <div style={{
         display: "flex",
         gap: 18,
         borderBottom: "1px solid #eee",
         marginBottom: 14,
+        padding: "0 15px",
         fontFamily: "var(--site-font)",
         fontSize: 10,
       }}>
@@ -907,7 +910,7 @@ function ExhibitionPage({ lang, images, captions, aboutTexts, processImages, bou
       </div>
 
       {/* Tab content */}
-      <div style={{ minHeight: 480 }}>
+      <div style={{ minHeight: 480, padding: "0 15px" }}>
         {activeTab === "about" && (
           <div style={{ paddingBottom: 20, fontFamily: "var(--site-font)" }}>
             <div style={{ maxWidth: 480, marginBottom: 100 }}>
@@ -933,6 +936,8 @@ function ExhibitionPage({ lang, images, captions, aboutTexts, processImages, bou
                     height: bounceContainerHeight || "clamp(500px, 80vh, 800px)",
                     overflow: "hidden",
                     borderBottom: "1px solid #ddd",
+                    marginLeft: -15,
+                    marginRight: -15,
                   }}
                 >
                   <svg

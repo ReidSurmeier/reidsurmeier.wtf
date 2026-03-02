@@ -2189,7 +2189,7 @@ export default function Home() {
 
         {/* Mobile Gallery Page */}
         {showGallery && (
-          <div style={{ padding: "20px 15px", minHeight: "60vh" }}>
+          <div style={{ paddingTop: 20, minHeight: "60vh" }}>
             <GalleryPage
               onClose={() => navigateTo("home")}
               title={

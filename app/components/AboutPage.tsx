@@ -286,33 +286,21 @@ export default function AboutPage({ onClose, lang, onContact }: { onClose: () =>
 
   const audioRef = useRef<HTMLAudioElement>(null);
   const fadeRafRef = useRef<number>(0);
-  const userPausedRef = useRef(false);
   const chartSectionRef = useRef<HTMLDivElement>(null);
   const bouncingContainerRef = useRef<HTMLDivElement>(null);
   const bioLeftRef = useRef<HTMLDivElement>(null);
   const bioRightRef = useRef<HTMLDivElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
-  // Hard stop: cancel any fade animation AND pause the audio element
-  const stopAudio = () => {
-    userPausedRef.current = true;
-    cancelAnimationFrame(fadeRafRef.current);
-    fadeRafRef.current = 0;
-    const a = audioRef.current;
-    if (a) { a.pause(); a.currentTime = a.currentTime; } // force stop
-    setIsPlaying(false);
-  };
-
   // Auto-play with fade-in on mount, fade-out on unmount
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
-    userPausedRef.current = false;
     audio.volume = 0;
 
     const doFadeIn = () => {
       const step = () => {
-        if (userPausedRef.current || audio.paused) { fadeRafRef.current = 0; return; }
+        if (audio.paused) { fadeRafRef.current = 0; return; }
         const next = Math.min(1, audio.volume + 0.01);
         audio.volume = next;
         if (next < 1) { fadeRafRef.current = requestAnimationFrame(step); }
@@ -321,14 +309,7 @@ export default function AboutPage({ onClose, lang, onContact }: { onClose: () =>
       fadeRafRef.current = requestAnimationFrame(step);
     };
 
-    const playPromise = audio.play();
-    if (playPromise) {
-      playPromise.then(() => {
-        if (userPausedRef.current) return; // user already clicked pause
-        setIsPlaying(true);
-        doFadeIn();
-      }).catch(() => { /* autoplay blocked */ });
-    }
+    audio.play().then(() => { doFadeIn(); }).catch(() => { /* autoplay blocked */ });
 
     return () => {
       cancelAnimationFrame(fadeRafRef.current);
@@ -516,13 +497,13 @@ export default function AboutPage({ onClose, lang, onContact }: { onClose: () =>
                 onClick={() => {
                   const audio = audioRef.current;
                   if (!audio) return;
-                  if (!audio.paused || isPlaying) {
-                    stopAudio();
-                  } else {
-                    userPausedRef.current = false;
+                  if (audio.paused) {
+                    cancelAnimationFrame(fadeRafRef.current);
                     audio.volume = 1;
                     audio.play().catch(() => {});
-                    setIsPlaying(true);
+                  } else {
+                    cancelAnimationFrame(fadeRafRef.current);
+                    audio.pause();
                   }
                 }}
                 style={{
@@ -538,7 +519,7 @@ export default function AboutPage({ onClose, lang, onContact }: { onClose: () =>
               <span style={{ fontSize: 15, color: "#bbb", fontFamily: "var(--site-font)" }}>
                 {"\u266B"} {t.about}
               </span>
-              <audio ref={audioRef} src="/reid_audio.mp3" onEnded={() => setIsPlaying(false)} />
+              <audio ref={audioRef} src="/reid_audio.mp3" onPlay={() => setIsPlaying(true)} onPause={() => setIsPlaying(false)} onEnded={() => setIsPlaying(false)} />
             </div>
 
             {/* Bio text — 70/30 two-column grid */}
