@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.png",
   },
+  themeColor: "#ffffff",
   title: {
     default: "Reid Surmeier, I.S.P.",
     template: "%s | Reid Surmeier, I.S.P.",

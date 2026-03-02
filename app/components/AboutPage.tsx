@@ -51,11 +51,18 @@ function BouncingImages({ containerRef }: { containerRef: React.RefObject<HTMLDi
 
   useEffect(() => {
     init();
+    let cachedW = 0, cachedH = 0, frameCount = 0;
     const tick = () => {
       const el = containerRef.current;
       if (!el) { rafRef.current = requestAnimationFrame(tick); return; }
-      const w = el.offsetWidth;
-      const h = el.offsetHeight;
+      // Only read layout dimensions every 30 frames to avoid forced reflow
+      if (frameCount % 30 === 0 || cachedW === 0) {
+        cachedW = el.offsetWidth;
+        cachedH = el.offsetHeight;
+      }
+      frameCount++;
+      const w = cachedW;
+      const h = cachedH;
       const states = statesRef.current;
 
       // Move + wall bounce
@@ -255,6 +262,8 @@ function BouncingImages({ containerRef }: { containerRef: React.RefObject<HTMLDi
           src={src}
           alt=""
           draggable={false}
+          loading="eager"
+          decoding="async"
           style={{
             position: "absolute",
             top: 0,
@@ -477,11 +486,11 @@ export default function AboutPage({ onClose, lang, onContact }: { onClose: () =>
           marginRight: 20,
         }}
       >
-        <span>312-344-0906</span>
-        <span style={{ color: "#ddd" }}>|</span>
-        <a href="mailto:rsurmeie@risd.edu" style={{ color: "#bbb", textDecoration: "none" }}>rsurmeie@risd.edu</a>
-        <span style={{ color: "#ddd" }}>|</span>
-        <a href="https://reidsurmeier.wtf" style={{ color: "#bbb", textDecoration: "none" }}>reidsurmeier.wtf</a>
+        <span style={{ fontSize: 10, whiteSpace: "nowrap" }}>312-344-0906</span>
+        <span style={{ color: "#ddd", fontSize: 10 }}>|</span>
+        <a href="mailto:rsurmeie@risd.edu" style={{ color: "#bbb", textDecoration: "none", fontSize: 10, whiteSpace: "nowrap" }}>rsurmeie@risd.edu</a>
+        <span style={{ color: "#ddd", fontSize: 10 }}>|</span>
+        <a href="https://reidsurmeier.wtf" style={{ color: "#bbb", textDecoration: "none", fontSize: 10, whiteSpace: "nowrap" }}>reidsurmeier.wtf</a>
       </div>
 
       {/* ─── Scrollable content ─── */}

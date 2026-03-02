@@ -510,10 +510,10 @@ export default function BookCovers({
         for (let i = 0; i < n; i++) {
           positionEl(itemEls[i], state[i].x, state[i].y, sizes[i].w, sizes[i].h);
         }
-        if (elapsed > CONN_DELAY) updateConnections();
+        if (elapsed > CONN_DELAY && bounceFrameCount % 2 === 0) updateConnections();
 
         // Notify parent so it can reposition sidebar leader lines (throttled)
-        if (bounceFrameCount % 3 === 0) {
+        if (bounceFrameCount % 4 === 0) {
           onBounceFrameRef.current?.();
         }
 
