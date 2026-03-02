@@ -2238,7 +2238,7 @@ export default function Home() {
 
         {/* Book covers */}
         <div style={{ padding: "0 15px", marginBottom: 40, display: showContact || showAbout || showCV || showGallery ? "none" : undefined, opacity: featuredRevealed ? 1 : 0, transition: "opacity 0.8s ease 0.2s" }}>
-          <BookCovers onHover={handleHover} onLeave={handleLeave} onAllVisible={() => { setCoversReady(true); hasPlayedIntroRef.current = true; }} onCoverClick={(idx) => { if (idx <= 4) navigateTo("prints"); else if (idx <= 7) window.open("https://www.instagram.com/reidsurmeier/", "_blank"); else if (idx <= 9) navigateTo("painting"); else if (idx === 10) navigateTo("about"); }} visible={isHomePage} skipIntro={hasPlayedIntroRef.current} noBounce captions={{ plotter: t.capPlotter, sketchbook: t.capSketchbook, press: t.capPress, painting: t.capPainting, about: t.capAbout }} />
+          <BookCovers onHover={handleHover} onLeave={handleLeave} onAllVisible={() => { setCoversReady(true); hasPlayedIntroRef.current = true; }} onCoverClick={(idx) => { if (idx <= 4) navigateTo("prints"); else if (idx <= 7) window.open("https://www.instagram.com/reidsurmeier/", "_blank"); else if (idx <= 9) navigateTo("painting"); else if (idx === 10) navigateTo("about"); }} visible={isHomePage} skipIntro={hasPlayedIntroRef.current} captions={{ plotter: t.capPlotter, sketchbook: t.capSketchbook, press: t.capPress, painting: t.capPainting, about: t.capAbout }} />
         </div>
 
         {/* TXT and IMG removed */}

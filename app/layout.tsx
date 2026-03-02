@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   },
   themeColor: "#ffffff",
   title: {
-    default: "Reid Surmeier, I.S.P.",
+    default: "Reid Surmeier, I.S.P. — Designer & Artist",
     template: "%s | Reid Surmeier, I.S.P.",
   },
   description:
@@ -40,24 +40,24 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://reidsurmeier.wtf",
     siteName: "Reid Surmeier, I.S.P.",
-    title: "Reid Surmeier, I.S.P.",
+    title: "Reid Surmeier, I.S.P. — Designer & Artist",
     description:
       "Independent Studio Practice. American multidisciplinary designer and artist working across computation, painting, and sculpture.",
     images: [
       {
-        url: "/Plotter_1.png",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Reid Surmeier — Pen plotter drawing",
+        alt: "Reid Surmeier — Multidisciplinary Designer and Artist",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Reid Surmeier, I.S.P.",
+    title: "Reid Surmeier, I.S.P. — Designer & Artist",
     description:
       "Independent Studio Practice. Multidisciplinary designer and artist working across computation, painting, and sculpture.",
-    images: ["/Plotter_1.png"],
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,

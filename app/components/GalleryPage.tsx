@@ -675,7 +675,7 @@ function ExhibitionPage({ lang, images, captions, aboutTexts, processImages, bou
       <div style={{ borderBottom: "1px solid #eee", marginBottom: 10 }} />
 
       {/* Hero image with navigation arrows */}
-      <div style={{ position: "relative", marginBottom: 10 }}>
+      <div style={{ position: "relative", marginBottom: 10, marginLeft: -15, marginRight: -15 }}>
         {/* Main image */}
         <div
           onClick={() => setFullscreen(true)}
