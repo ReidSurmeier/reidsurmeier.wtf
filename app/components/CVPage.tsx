@@ -830,9 +830,11 @@ export default function CVPage({ onClose, lang = "en" }: { onClose: () => void; 
                     {sectionLabels[displayNode.section]}
                   </span>
                 </div>
-                <p style={{ fontSize: 11, color: "#bbb", lineHeight: 1.5, margin: 0 }}>
-                  {getNodeDescription(displayNode)}
-                </p>
+                {getNodeSublabel(displayNode) && (
+                  <p style={{ fontSize: 11, color: "#bbb", lineHeight: 1.5, margin: 0 }}>
+                    {getNodeSublabel(displayNode)?.replace(/\n/g, " · ")}
+                  </p>
+                )}
               </>
             )}
           </div>
@@ -914,19 +916,6 @@ export default function CVPage({ onClose, lang = "en" }: { onClose: () => void; 
                         {getNodeSublabel(node) && (
                           <div style={{ fontSize: 9, color: "#999", lineHeight: 1.4, marginLeft: 19 }}>
                             {getNodeSublabel(node)?.replace(/\n/g, " · ")}
-                          </div>
-                        )}
-                        {isOpen && getNodeDescription(node) && (
-                          <div style={{
-                            fontSize: 10,
-                            color: "#bbb",
-                            lineHeight: 1.5,
-                            marginTop: 6,
-                            marginLeft: 19,
-                            paddingLeft: 8,
-                            borderLeft: `2px solid ${color}`,
-                          }}>
-                            {getNodeDescription(node)}
                           </div>
                         )}
                       </div>
