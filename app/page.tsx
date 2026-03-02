@@ -57,7 +57,7 @@ function SidebarStats() {
     const DISPLAY_W = 110, DISPLAY_H = 48;
     const W = DISPLAY_W * PR, H = DISPLAY_H * PR;
     const TX = 4 * PR, TY = 2 * PR;
-    const GX = 4 * PR, GY = 15 * PR, GW = (DISPLAY_W - 8) * PR, GH = 30 * PR;
+    const GX = 4 * PR, GY = 20 * PR, GW = (DISPLAY_W - 8) * PR, GH = 25 * PR;
     const colors = ["#EFEF3B", "#C5D5F0", "#C5A0D0"];
 
     const maxPoints = GW;
@@ -134,7 +134,8 @@ function SidebarStats() {
     el.appendChild(ms.wrapper);
     el.appendChild(kb.wrapper);
 
-    let beginTime = performance.now(), prevTime = beginTime, frames = 0;
+    let prevTime = performance.now(), frames = 0;
+    let msAccum = 0, msCount = 0, lastFrameTime = prevTime;
     let lastTotalKB = 0;
     let rafId: number;
 
@@ -142,12 +143,18 @@ function SidebarStats() {
       const now = performance.now();
       frames++;
 
-      ms.update(now - beginTime);
-      beginTime = now;
+      // Accumulate frame deltas for averaging
+      msAccum += now - lastFrameTime;
+      msCount++;
+      lastFrameTime = now;
 
       if (now >= prevTime + 1000) {
         // RAF — animation callbacks per second
         raf.update((frames * 1000) / (now - prevTime));
+
+        // MS — average frame time over the interval
+        ms.update(msAccum / msCount);
+        msAccum = 0; msCount = 0;
 
         // KB/s — transfer rate since last tick (cross-browser)
         const entries = performance.getEntriesByType("resource") as PerformanceResourceTiming[];
