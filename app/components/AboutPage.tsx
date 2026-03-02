@@ -285,45 +285,22 @@ export default function AboutPage({ onClose, lang, onContact, mobile = false }: 
   void onClose;
 
   const audioRef = useRef<HTMLAudioElement>(null);
-  const fadeRafRef = useRef<number>(0);
   const chartSectionRef = useRef<HTMLDivElement>(null);
   const bouncingContainerRef = useRef<HTMLDivElement>(null);
   const bioLeftRef = useRef<HTMLDivElement>(null);
   const bioRightRef = useRef<HTMLDivElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
-  // Auto-play with fade-in on mount, fade-out on unmount
+  // Try autoplay on mount, stop on unmount
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
-    audio.volume = 0;
-
-    const doFadeIn = () => {
-      const step = () => {
-        if (audio.paused) { fadeRafRef.current = 0; return; }
-        const next = Math.min(1, audio.volume + 0.01);
-        audio.volume = next;
-        if (next < 1) { fadeRafRef.current = requestAnimationFrame(step); }
-        else { fadeRafRef.current = 0; }
-      };
-      fadeRafRef.current = requestAnimationFrame(step);
-    };
-
-    audio.play().then(() => { doFadeIn(); }).catch(() => { /* autoplay blocked */ });
-
+    audio.volume = 1;
+    audio.play().catch(() => { /* autoplay blocked by browser */ });
     return () => {
-      cancelAnimationFrame(fadeRafRef.current);
-      // Fade out on unmount
-      const a = audioRef.current;
-      if (!a || a.paused) return;
-      let v = a.volume;
-      const fadeOut = setInterval(() => {
-        v = Math.max(0, v - 0.03);
-        if (a) a.volume = v;
-        if (v <= 0) { clearInterval(fadeOut); if (a) a.pause(); }
-      }, 40);
+      audio.pause();
+      audio.currentTime = 0;
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const [subscribed, setSubscribed] = useState(false);
   const [emailValid, setEmailValid] = useState(false);
@@ -493,16 +470,15 @@ export default function AboutPage({ onClose, lang, onContact, mobile = false }: 
           <div style={{ maxWidth: "100%" }}>
             {/* Audio player inline */}
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
-              <span
+              <button
+                type="button"
                 onClick={() => {
                   const audio = audioRef.current;
                   if (!audio) return;
                   if (audio.paused) {
-                    cancelAnimationFrame(fadeRafRef.current);
                     audio.volume = 1;
                     audio.play().catch(() => {});
                   } else {
-                    cancelAnimationFrame(fadeRafRef.current);
                     audio.pause();
                   }
                 }}
@@ -512,14 +488,26 @@ export default function AboutPage({ onClose, lang, onContact, mobile = false }: 
                   color: "#999",
                   userSelect: "none",
                   fontFamily: "'Inter', sans-serif",
+                  background: "none",
+                  border: "none",
+                  padding: 0,
+                  margin: 0,
+                  lineHeight: 1,
                 }}
               >
                 {isPlaying ? "\u275A\u275A" : "\u25BA"}
-              </span>
+              </button>
               <span style={{ fontSize: 15, color: "#bbb", fontFamily: "'Inter', sans-serif" }}>
                 {"\u266B"} {t.about}
               </span>
-              <audio ref={audioRef} src="/reid_audio.mp3" onPlay={() => setIsPlaying(true)} onPause={() => setIsPlaying(false)} onEnded={() => setIsPlaying(false)} />
+              <audio
+                ref={audioRef}
+                src="/reid_audio.mp3"
+                preload="auto"
+                onPlay={() => setIsPlaying(true)}
+                onPause={() => setIsPlaying(false)}
+                onEnded={() => setIsPlaying(false)}
+              />
             </div>
 
             {/* Bio text — 70/30 two-column grid */}
