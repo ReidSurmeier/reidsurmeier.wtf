@@ -136,6 +136,7 @@ function SidebarStats() {
 
     let prevTime = performance.now(), frames = 0;
     let msAccum = 0, msCount = 0, lastFrameTime = prevTime;
+    let msSmoothed = -1;
     let lastTotalKB = 0;
     let rafId: number;
 
@@ -152,8 +153,10 @@ function SidebarStats() {
         // RAF — animation callbacks per second
         raf.update((frames * 1000) / (now - prevTime));
 
-        // MS — average frame time over the interval
-        ms.update(msAccum / msCount);
+        // MS — smoothed average frame time (EMA so the number drifts slowly)
+        const msRaw = msAccum / msCount;
+        msSmoothed = msSmoothed < 0 ? msRaw : msSmoothed * 0.92 + msRaw * 0.08;
+        ms.update(msSmoothed);
         msAccum = 0; msCount = 0;
 
         // KB/s — transfer rate since last tick (cross-browser)
