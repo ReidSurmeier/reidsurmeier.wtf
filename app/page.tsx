@@ -2214,6 +2214,7 @@ export default function Home() {
               }
               lang={lang}
               onContact={() => navigateTo("contact")}
+              mobile
             />
           </div>
         )}

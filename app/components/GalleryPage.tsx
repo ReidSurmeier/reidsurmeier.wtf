@@ -315,7 +315,7 @@ const galleryTranslations: Record<Lang, {
 type Tab = "about" | "press" | "shop";
 const tabKeys: Tab[] = ["about", "press", "shop"];
 
-function ExhibitionPage({ lang, images, captions, aboutTexts, processImages, bounceImages, bounceImageSize, bounceContainerHeight, onContact }: {
+function ExhibitionPage({ lang, images, captions, aboutTexts, processImages, bounceImages, bounceImageSize, bounceContainerHeight, onContact, mobile = false }: {
   lang: Lang;
   images: string[];
   captions: Array<{ title: string; date: string; medium: string; dimensions: string }>;
@@ -325,6 +325,7 @@ function ExhibitionPage({ lang, images, captions, aboutTexts, processImages, bou
   bounceImageSize?: number;
   bounceContainerHeight?: string;
   onContact?: () => void;
+  mobile?: boolean;
 }) {
   const [activeTab, setActiveTab] = useState<Tab>("about");
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -936,8 +937,8 @@ function ExhibitionPage({ lang, images, captions, aboutTexts, processImages, bou
                     height: bounceContainerHeight || "clamp(500px, 80vh, 800px)",
                     overflow: "hidden",
                     borderBottom: "1px solid #ddd",
-                    marginLeft: -15,
-                    marginRight: -15,
+                    marginLeft: mobile ? -15 : 0,
+                    marginRight: mobile ? -15 : 0,
                   }}
                 >
                   <svg
@@ -2433,12 +2434,14 @@ export default function GalleryPage({
   inputLabel,
   lang = "en",
   onContact,
+  mobile = false,
 }: {
   onClose: () => void;
   title: string;
   inputLabel: string;
   lang?: Lang;
   onContact?: () => void;
+  mobile?: boolean;
 }) {
   void onClose;
   const skipLoader = inputLabel === "Input_008" || inputLabel === "Input_010" || inputLabel === "Input_012" || inputLabel === "Input_013" || inputLabel === "Input_015";
@@ -2468,6 +2471,7 @@ export default function GalleryPage({
           aboutTexts={galleryTranslations[lang]}
           processImages={["/Plotter_1.png", "/plotter_2.png"]}
           onContact={onContact}
+          mobile={mobile}
         />
       );
     }
@@ -2486,6 +2490,7 @@ export default function GalleryPage({
           bounceImageSize={120}
           bounceContainerHeight="clamp(320px, 50vh, 400px)"
           onContact={onContact}
+          mobile={mobile}
         />
       );
     }
@@ -2545,8 +2550,8 @@ export default function GalleryPage({
             fontSize: 11,
             color: "#bbb",
             paddingBottom: 4,
-            paddingLeft: 30,
-            marginRight: 20,
+            paddingLeft: mobile ? 15 : 30,
+            marginRight: mobile ? 15 : 20,
           }}
         >
           <div style={{ display: "flex", gap: 20 }}>
@@ -2561,8 +2566,8 @@ export default function GalleryPage({
         style={{
           flex: 1,
           paddingTop: 14,
-          paddingLeft: 30,
-          paddingRight: "clamp(40px, 8vw, 160px)",
+          paddingLeft: mobile ? 0 : 30,
+          paddingRight: mobile ? 0 : "clamp(40px, 8vw, 160px)",
           overflowY: "auto",
           opacity: contentVisible ? 1 : 0,
           transform: contentVisible ? "translateY(0)" : "translateY(6px)",
