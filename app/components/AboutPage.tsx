@@ -425,14 +425,14 @@ export default function AboutPage({ onClose, lang, onContact }: { onClose: () =>
   const bioParagraphs = biosByLang[lang] || biosByLang.en;
 
 
-  const ui: Record<string, { about: string; printing: string; guestbook: string; name: string; date: string; message: string; contact: string; email: string; send: string; mailing: string; subscribed: string; pressEnter: string }> = {
-    en: { about: "About", printing: "Printing", guestbook: "Sign my guestbook", name: "Name", date: "Date", message: "Message", contact: "Contact", email: "Email", send: "Send", mailing: "Mailing list", subscribed: "Subscribed", pressEnter: "press enter to subscribe" },
-    de: { about: "\u00DCber", printing: "Druck", guestbook: "G\u00e4stebuch unterschreiben", name: "Name", date: "Datum", message: "Nachricht", contact: "Kontakt", email: "E-Mail", send: "Senden", mailing: "Mailingliste", subscribed: "Abonniert", pressEnter: "Enter dr\u00fccken zum Abonnieren" },
-    fr: { about: "\u00C0 propos", printing: "Impression", guestbook: "Signer mon livre d\u2019or", name: "Nom", date: "Date", message: "Message", contact: "Contact", email: "E-mail", send: "Envoyer", mailing: "Liste de diffusion", subscribed: "Abonn\u00e9", pressEnter: "appuyez sur Entr\u00e9e pour vous abonner" },
-    ko: { about: "\uc18c\uac1c", printing: "\uc778\uc1c4", guestbook: "\uBC29\uBA85\uB85D \uC11C\uBA85", name: "\uC774\uB984", date: "\uB0A0\uC9DC", message: "\uBA54\uC2DC\uC9C0", contact: "\uC5F0\uB77D\uCC98", email: "\uC774\uBA54\uC77C", send: "\uBCF4\uB0B4\uAE30", mailing: "\uBA54\uC77C\uB9C1 \uB9AC\uC2A4\uD2B8", subscribed: "\uAD6C\uB3C5\uB428", pressEnter: "Enter\uB97C \uB20C\uB7EC \uAD6C\uB3C5" },
-    id: { about: "Tentang", printing: "Cetak", guestbook: "Tanda tangani buku tamu", name: "Nama", date: "Tanggal", message: "Pesan", contact: "Kontak", email: "Email", send: "Kirim", mailing: "Milis", subscribed: "Berlangganan", pressEnter: "tekan Enter untuk berlangganan" },
-    zh: { about: "\u5173\u4e8e", printing: "\u5370\u5237", guestbook: "\u7B7E\u540D\u7559\u8A00\u7C3F", name: "\u59D3\u540D", date: "\u65E5\u671F", message: "\u7559\u8A00", contact: "\u8054\u7CFB", email: "\u7535\u5B50\u90AE\u4EF6", send: "\u53D1\u9001", mailing: "\u90AE\u4EF6\u5217\u8868", subscribed: "\u5DF2\u8BA2\u9605", pressEnter: "\u6309 Enter \u8BA2\u9605" },
-    ja: { about: "\u6982\u8981", printing: "\u5370\u5237", guestbook: "\u30B2\u30B9\u30C8\u30D6\u30C3\u30AF\u306B\u7F72\u540D", name: "\u540D\u524D", date: "\u65E5\u4ED8", message: "\u30E1\u30C3\u30BB\u30FC\u30B8", contact: "\u304A\u554F\u3044\u5408\u308F\u305B", email: "\u30E1\u30FC\u30EB", send: "\u9001\u4FE1", mailing: "\u30E1\u30FC\u30EA\u30F3\u30B0\u30EA\u30B9\u30C8", subscribed: "\u767B\u9332\u6E08\u307F", pressEnter: "Enter\u3067\u767B\u9332" },
+  const ui: Record<string, { about: string; printing: string; guestbook: string; name: string; date: string; message: string; contact: string; email: string; send: string; mailing: string; subscribed: string; pressEnter: string; getInTouch: string }> = {
+    en: { about: "About", printing: "Printing", guestbook: "Sign my guestbook", name: "Name", date: "Date", message: "Message", contact: "Contact", email: "Email", send: "Send", mailing: "Mailing list", subscribed: "Subscribed", pressEnter: "press enter to subscribe", getInTouch: "Get In Touch" },
+    de: { about: "\u00DCber", printing: "Druck", guestbook: "G\u00e4stebuch unterschreiben", name: "Name", date: "Datum", message: "Nachricht", contact: "Kontakt", email: "E-Mail", send: "Senden", mailing: "Mailingliste", subscribed: "Abonniert", pressEnter: "Enter dr\u00fccken zum Abonnieren", getInTouch: "Kontakt aufnehmen" },
+    fr: { about: "\u00C0 propos", printing: "Impression", guestbook: "Signer mon livre d\u2019or", name: "Nom", date: "Date", message: "Message", contact: "Contact", email: "E-mail", send: "Envoyer", mailing: "Liste de diffusion", subscribed: "Abonn\u00e9", pressEnter: "appuyez sur Entr\u00e9e pour vous abonner", getInTouch: "Contactez-moi" },
+    ko: { about: "\uc18c\uac1c", printing: "\uc778\uc1c4", guestbook: "\uBC29\uBA85\uB85D \uC11C\uBA85", name: "\uC774\uB984", date: "\uB0A0\uC9DC", message: "\uBA54\uC2DC\uC9C0", contact: "\uC5F0\uB77D\uCC98", email: "\uC774\uBA54\uC77C", send: "\uBCF4\uB0B4\uAE30", mailing: "\uBA54\uC77C\uB9C1 \uB9AC\uC2A4\uD2B8", subscribed: "\uAD6C\uB3C5\uB428", pressEnter: "Enter\uB97C \uB20C\uB7EC \uAD6C\uB3C5", getInTouch: "\uC5F0\uB77D\uD558\uAE30" },
+    id: { about: "Tentang", printing: "Cetak", guestbook: "Tanda tangani buku tamu", name: "Nama", date: "Tanggal", message: "Pesan", contact: "Kontak", email: "Email", send: "Kirim", mailing: "Milis", subscribed: "Berlangganan", pressEnter: "tekan Enter untuk berlangganan", getInTouch: "Hubungi Saya" },
+    zh: { about: "\u5173\u4e8e", printing: "\u5370\u5237", guestbook: "\u7B7E\u540D\u7559\u8A00\u7C3F", name: "\u59D3\u540D", date: "\u65E5\u671F", message: "\u7559\u8A00", contact: "\u8054\u7CFB", email: "\u7535\u5B50\u90AE\u4EF6", send: "\u53D1\u9001", mailing: "\u90AE\u4EF6\u5217\u8868", subscribed: "\u5DF2\u8BA2\u9605", pressEnter: "\u6309 Enter \u8BA2\u9605", getInTouch: "\u8054\u7CFB\u6211" },
+    ja: { about: "\u6982\u8981", printing: "\u5370\u5237", guestbook: "\u30B2\u30B9\u30C8\u30D6\u30C3\u30AF\u306B\u7F72\u540D", name: "\u540D\u524D", date: "\u65E5\u4ED8", message: "\u30E1\u30C3\u30BB\u30FC\u30B8", contact: "\u304A\u554F\u3044\u5408\u308F\u305B", email: "\u30E1\u30FC\u30EB", send: "\u9001\u4FE1", mailing: "\u30E1\u30FC\u30EA\u30F3\u30B0\u30EA\u30B9\u30C8", subscribed: "\u767B\u9332\u6E08\u307F", pressEnter: "Enter\u3067\u767B\u9332", getInTouch: "\u304A\u554F\u3044\u5408\u308F\u305B" },
   };
   const t = ui[lang] || ui.en;
 
@@ -457,7 +457,7 @@ export default function AboutPage({ onClose, lang, onContact }: { onClose: () =>
           display: "flex",
           alignItems: "center",
           gap: 12,
-          fontFamily: "var(--site-font)",
+          fontFamily: "'Inter', sans-serif",
           fontSize: 11,
           color: "#bbb",
           borderBottom: "1px solid #eee",
@@ -467,8 +467,6 @@ export default function AboutPage({ onClose, lang, onContact }: { onClose: () =>
           marginRight: 20,
         }}
       >
-        <span style={{ fontSize: 10, whiteSpace: "nowrap" }}>312-344-0906</span>
-        <span style={{ color: "#ddd", fontSize: 10 }}>|</span>
         <a href="mailto:rsurmeie@risd.edu" style={{ color: "#bbb", textDecoration: "none", fontSize: 10, whiteSpace: "nowrap" }}>rsurmeie@risd.edu</a>
         <span style={{ color: "#ddd", fontSize: 10 }}>|</span>
         <a href="https://reidsurmeier.wtf" style={{ color: "#bbb", textDecoration: "none", fontSize: 10, whiteSpace: "nowrap" }}>reidsurmeier.wtf</a>
@@ -479,7 +477,7 @@ export default function AboutPage({ onClose, lang, onContact }: { onClose: () =>
         style={{
           flex: 1,
           overflowY: "auto",
-          fontFamily: "var(--site-font)",
+          fontFamily: "'Inter', sans-serif",
           color: "#999",
           fontSize: 13,
         }}
@@ -511,12 +509,12 @@ export default function AboutPage({ onClose, lang, onContact }: { onClose: () =>
                   cursor: "pointer",
                   color: "#999",
                   userSelect: "none",
-                  fontFamily: "var(--site-font)",
+                  fontFamily: "'Inter', sans-serif",
                 }}
               >
                 {isPlaying ? "\u275A\u275A" : "\u25BA"}
               </span>
-              <span style={{ fontSize: 15, color: "#bbb", fontFamily: "var(--site-font)" }}>
+              <span style={{ fontSize: 15, color: "#bbb", fontFamily: "'Inter', sans-serif" }}>
                 {"\u266B"} {t.about}
               </span>
               <audio ref={audioRef} src="/reid_audio.mp3" onPlay={() => setIsPlaying(true)} onPause={() => setIsPlaying(false)} onEnded={() => setIsPlaying(false)} />
@@ -550,7 +548,7 @@ export default function AboutPage({ onClose, lang, onContact }: { onClose: () =>
                 href="mailto:reid@reidsurmeier.com?subject=Hi!"
                 style={{
                   display: "inline-flex", alignItems: "center", gap: 6,
-                  marginTop: 8, marginLeft: 22, fontSize: 11, fontFamily: "var(--site-font)",
+                  marginTop: 8, marginLeft: 22, fontSize: 11, fontFamily: "'Inter', sans-serif",
                   color: "#bbb", border: "1px solid #ddd", borderRadius: 3,
                   padding: "5px 12px", textDecoration: "none",
                   transition: "color 0.15s ease, border-color 0.15s ease",
@@ -558,7 +556,7 @@ export default function AboutPage({ onClose, lang, onContact }: { onClose: () =>
                 onMouseEnter={(e) => { e.currentTarget.style.color = "#000"; e.currentTarget.style.borderColor = "#000"; }}
                 onMouseLeave={(e) => { e.currentTarget.style.color = "#bbb"; e.currentTarget.style.borderColor = "#ddd"; }}
               >
-                Get In Touch
+                {t.getInTouch}
               </a>
               </div>
             </div>
@@ -609,7 +607,7 @@ export default function AboutPage({ onClose, lang, onContact }: { onClose: () =>
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
-                  fontFamily: "var(--site-font)",
+                  fontFamily: "'Inter', sans-serif",
                   fontSize: 11,
                   color: "#999",
                   textDecoration: "none",
@@ -635,11 +633,11 @@ export default function AboutPage({ onClose, lang, onContact }: { onClose: () =>
 
             {/* Mailing list signup */}
             <div style={{ marginBottom: 40 }}>
-              <div style={{ fontFamily: "var(--site-font)", fontSize: 11, fontWeight: 600, color: "#ccc", marginBottom: 12, letterSpacing: "0.5px", textTransform: "uppercase" as const }}>
+              <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, fontWeight: 600, color: "#ccc", marginBottom: 12, letterSpacing: "0.5px", textTransform: "uppercase" as const }}>
                 {t.mailing}
               </div>
               {subscribed ? (
-                <div style={{ fontFamily: "var(--site-font)", fontSize: 11, color: "#ccc" }}>
+                <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, color: "#ccc" }}>
                   {t.subscribed}
                 </div>
               ) : (
@@ -657,7 +655,7 @@ export default function AboutPage({ onClose, lang, onContact }: { onClose: () =>
                       required
                       onChange={(e) => setEmailValid(e.target.validity.valid && e.target.value.length > 0)}
                       style={{
-                        fontFamily: "var(--site-font)",
+                        fontFamily: "'Inter', sans-serif",
                         fontSize: 11,
                         padding: "8px 10px",
                         border: "1px solid #ddd",
@@ -671,7 +669,7 @@ export default function AboutPage({ onClose, lang, onContact }: { onClose: () =>
                   </form>
                   {emailValid && (
                     <div style={{ overflow: "hidden", marginTop: 6, height: 14, animation: "mailing-fade-in 2s ease forwards", opacity: 0 }}>
-                      <div style={{ fontFamily: "var(--site-font)", fontSize: 10, color: "#ccc", whiteSpace: "nowrap", animation: "marquee-scroll 20s linear infinite" }}>
+                      <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, color: "#ccc", whiteSpace: "nowrap", animation: "marquee-scroll 20s linear infinite" }}>
                         {t.pressEnter}{"\u2003\u2003\u2003"}{t.pressEnter}{"\u2003\u2003\u2003"}{t.pressEnter}{"\u2003\u2003\u2003"}{t.pressEnter}
                       </div>
                     </div>
@@ -688,7 +686,7 @@ export default function AboutPage({ onClose, lang, onContact }: { onClose: () =>
               flex: "1 1 250px",
               maxWidth: 250,
               marginLeft: "auto",
-              fontFamily: "var(--site-font)",
+              fontFamily: "'Inter', sans-serif",
               fontSize: 11,
               color: "#999",
               display: "flex",
@@ -714,7 +712,7 @@ export default function AboutPage({ onClose, lang, onContact }: { onClose: () =>
                 placeholder={t.name}
                 required
                 style={{
-                  fontFamily: "var(--site-font)",
+                  fontFamily: "'Inter', sans-serif",
                   fontSize: 11,
                   padding: "8px 10px",
                   border: "1px solid #ddd",
@@ -730,7 +728,7 @@ export default function AboutPage({ onClose, lang, onContact }: { onClose: () =>
                 placeholder={t.email}
                 required
                 style={{
-                  fontFamily: "var(--site-font)",
+                  fontFamily: "'Inter', sans-serif",
                   fontSize: 11,
                   padding: "8px 10px",
                   border: "1px solid #ddd",
@@ -745,7 +743,7 @@ export default function AboutPage({ onClose, lang, onContact }: { onClose: () =>
                 placeholder={t.message}
                 required
                 style={{
-                  fontFamily: "var(--site-font)",
+                  fontFamily: "'Inter', sans-serif",
                   fontSize: 11,
                   padding: "8px 10px",
                   border: "1px solid #ddd",
@@ -761,7 +759,7 @@ export default function AboutPage({ onClose, lang, onContact }: { onClose: () =>
               <button
                 type="submit"
                 style={{
-                  fontFamily: "var(--site-font)",
+                  fontFamily: "'Inter', sans-serif",
                   fontSize: 11,
                   padding: "8px 16px",
                   border: "1px solid #ccc",
@@ -791,7 +789,7 @@ export default function AboutPage({ onClose, lang, onContact }: { onClose: () =>
             borderTop: "1px solid #eee",
           }}
         >
-          <span style={{ fontSize: 11, color: "#bbb", fontFamily: "var(--site-font)", letterSpacing: "0.5px" }}>
+          <span style={{ fontSize: 11, color: "#bbb", fontFamily: "'Inter', sans-serif", letterSpacing: "0.5px" }}>
             {"2026 \u00A9 \u2027\u208A\u02DA"}
           </span>
           <button
@@ -801,7 +799,7 @@ export default function AboutPage({ onClose, lang, onContact }: { onClose: () =>
               borderRadius: 0,
               padding: "4px 16px",
               fontSize: 11,
-              fontFamily: "var(--site-font)",
+              fontFamily: "'Inter', sans-serif",
               background: "none",
               color: "#888",
               cursor: "pointer",
