@@ -1,0 +1,235 @@
+@import "tailwindcss";
+
+/* === TEST FONT: Pitch Sans — remove this block to revert to Inter/Arial === */
+@font-face {
+  font-family: 'TestPitchSans';
+  src: url('/fonts/test-pitch-sans-light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'TestPitchSans';
+  src: url('/fonts/test-pitch-sans-light-italic.woff2') format('woff2');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'TestPitchSans';
+  src: url('/fonts/test-pitch-sans-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'TestPitchSans';
+  src: url('/fonts/test-pitch-sans-regular-italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'TestPitchSans';
+  src: url('/fonts/test-pitch-sans-medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'TestPitchSans';
+  src: url('/fonts/test-pitch-sans-medium-italic.woff2') format('woff2');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'TestPitchSans';
+  src: url('/fonts/test-pitch-sans-semibold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'TestPitchSans';
+  src: url('/fonts/test-pitch-sans-bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'TestPitchSans';
+  src: url('/fonts/test-pitch-sans-bold-italic.woff2') format('woff2');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+/* === END TEST FONT === */
+
+/* === TEST FONT TOGGLE: change 'TestPitchSans' back to 'Inter' to revert === */
+:root {
+  --site-font: 'TestPitchSans', sans-serif;
+  /* --site-font: 'Inter', sans-serif; */  /* ← uncomment this line & comment above to revert */
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+@media (min-width: 768px) {
+  html, body {
+    cursor: none;
+  }
+  * {
+    cursor: none !important;
+  }
+}
+
+@media (max-width: 767px) {
+  html, body {
+    overflow: auto;
+  }
+}
+
+
+a, a:visited, a:hover {
+  color: #000;
+  text-decoration: none;
+}
+
+a:hover, a:active {
+  outline: 0;
+  text-decoration: none;
+}
+
+h1, h2, h3, h4, p {
+  padding: 0;
+  margin: 0;
+}
+
+::selection {
+  background: #000;
+  color: #fff;
+  text-shadow: none;
+}
+
+.clearfix::before, .clearfix::after {
+  content: "";
+  display: table;
+}
+.clearfix::after {
+  clear: both;
+}
+
+@keyframes blink-cursor {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+@keyframes cvDescFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes marquee-scroll {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-text {
+  display: inline-block;
+  animation: marquee-scroll 18s linear infinite;
+}
+
+@keyframes marquee-quote-drift {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+@keyframes marquee-quote-slow {
+  0% { transform: translateX(100%); }
+  25% { transform: translateX(-100%); }
+  100% { transform: translateX(-100%); }
+}
+
+.marquee-quote {
+  display: inline-block;
+  animation: marquee-quote-slow 60s linear infinite;
+}
+
+@keyframes sidebar-marquee-drift {
+  0% { transform: translateX(-100%); opacity: 0; }
+  10% { opacity: 1; }
+  45% { transform: translateX(0%); opacity: 1; }
+  55% { transform: translateX(0%); opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateX(100%); opacity: 0; }
+}
+
+.sidebar-marquee {
+  display: inline-block;
+  animation: sidebar-marquee-drift 10s ease-in-out forwards;
+}
+
+.marquee-quote-container {
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+}
+
+.tile-border:hover {
+  border: 3px solid #aaa !important;
+  border-radius: 3px;
+  margin-left: 4px !important;
+  margin-right: 4px !important;
+  margin-top: -2px;
+  margin-bottom: -2px;
+}
+
+/* Denser dashes for all dashed borders */
+.dense-dash {
+  border-image: repeating-linear-gradient(
+    to right,
+    #ddd 0,
+    #ddd 4px,
+    transparent 4px,
+    transparent 7px
+  ) 1;
+}
+.dense-dash-v {
+  border-image: repeating-linear-gradient(
+    to bottom,
+    #ddd 0,
+    #ddd 4px,
+    transparent 4px,
+    transparent 7px
+  ) 1;
+}
+
+/* Hide all scrollbars on desktop */
+@media (min-width: 768px) {
+  html,
+  body,
+  div,
+  section,
+  main,
+  aside,
+  nav {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+  }
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar,
+  div::-webkit-scrollbar,
+  section::-webkit-scrollbar,
+  main::-webkit-scrollbar,
+  aside::-webkit-scrollbar,
+  nav::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+}

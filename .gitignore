@@ -1,0 +1,27 @@
+# dependencies
+node_modules/
+
+# build output
+out/
+.next/
+
+# environment
+.env
+.env.local
+.env.production.local
+.env.development.local
+
+# large media
+*.mov
+
+# misc
+.DS_Store
+*.pem
+*.log
+*.tsbuildinfo
+.vscode/
+.idea/
+dist/
+build/
+.cache/
+tmp/

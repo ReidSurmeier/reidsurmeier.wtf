@@ -1,0 +1,42 @@
+{
+  "name": "003-memory-app",
+  "version": "1.0.0",
+  "description": "Memory Health Check sample app",
+  "license": "MIT",
+  "scripts": {
+    "build": "rm -rf dist && tsc -p tsconfig.json",
+    "e2e": "echo 'No e2e tests implemented yet.'",
+    "e2e:watch": "jest --watch --config=e2e/jest-e2e.json",
+    "start": "ts-node src/main.ts",
+    "prestart:prod": "tsc",
+    "start:prod": "node dist/main.js",
+    "test": "jest",
+    "test:coverage": "jest --config=jest.json --coverage --coverageDirectory=coverage",
+    "test:watch": "jest --watch --config=jest.json"
+  },
+  "dependencies": {
+    "@nestjs/terminus": "link:../../",
+    "@nestjs/common": "catalog:",
+    "@nestjs/core": "catalog:",
+    "@nestjs/platform-express": "catalog:",
+    "class-transformer": "catalog:",
+    "class-validator": "catalog:",
+    "lodash": "catalog:",
+    "reflect-metadata": "catalog:",
+    "rxjs": "catalog:"
+  },
+  "devDependencies": {
+    "@types/jest": "catalog:",
+    "@types/node": "catalog:",
+    "@typescript-eslint/eslint-plugin": "catalog:",
+    "@typescript-eslint/parser": "catalog:",
+    "eslint": "catalog:",
+    "eslint-config-prettier": "catalog:",
+    "eslint-plugin-import": "catalog:",
+    "jest": "catalog:",
+    "supertest": "catalog:",
+    "ts-jest": "catalog:",
+    "ts-node": "catalog:",
+    "typescript": "catalog:"
+  }
+}

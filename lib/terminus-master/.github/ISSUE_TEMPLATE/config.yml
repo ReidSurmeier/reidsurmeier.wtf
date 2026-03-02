@@ -1,0 +1,6 @@
+blank_issues_enabled: true
+
+contact_links:
+  - name: "\u2753 Discord Community of NestJS"
+    url: "https://discord.gg/NestJS"
+    about: "Please ask support questions here. Checkout the #terminus channel."

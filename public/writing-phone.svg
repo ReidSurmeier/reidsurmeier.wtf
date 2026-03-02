@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 720" fill="none" stroke="#222" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Figure label top-left (original Japanese) -->
+  <text x="20" y="40" font-family="var(--site-font), sans-serif" font-size="32" fill="#222" stroke="none">&#x56F3;13A</text>
+
+  <!-- Phone outer body - double rounded rect -->
+  <rect x="70" y="60" width="300" height="580" rx="36" ry="36" fill="none"/>
+  <rect x="74" y="64" width="292" height="572" rx="33" ry="33" fill="none" stroke-width="1.5"/>
+
+  <!-- Screen area -->
+  <rect x="95" y="115" width="250" height="420" rx="4" ry="4" fill="none" stroke-width="2"/>
+
+  <!-- Home button -->
+  <circle cx="220" cy="595" r="22" fill="none" stroke-width="2.5"/>
+
+  <!-- Dimension lines on right -->
+  <line x1="380" y1="60" x2="420" y2="60" stroke-width="1.2"/>
+  <line x1="380" y1="115" x2="420" y2="115" stroke-width="1.2"/>
+  <line x1="380" y1="535" x2="420" y2="535" stroke-width="1.2"/>
+  <!-- Vertical dimension line -->
+  <line x1="410" y1="60" x2="410" y2="115" stroke-width="0.8"/>
+  <line x1="410" y1="115" x2="410" y2="535" stroke-width="0.8"/>
+  <text x="418" y="93" font-family="var(--site-font), sans-serif" font-size="16" fill="#222" stroke="none">10</text>
+  <text x="418" y="128" font-family="var(--site-font), sans-serif" font-size="16" fill="#222" stroke="none">16</text>
+  <text x="418" y="330" font-family="var(--site-font), sans-serif" font-size="16" fill="#222" stroke="none">105</text>
+
+  <!-- Profile icon circle -->
+  <circle cx="120" cy="145" r="18" fill="none" stroke-width="2"/>
+  <!-- Simple smiley face in profile icon -->
+  <circle cx="114" cy="140" r="2.5" fill="#222" stroke="none"/>
+  <circle cx="126" cy="140" r="2.5" fill="#222" stroke="none"/>
+  <path d="M112 148 Q120 155 128 148" fill="none" stroke-width="1.8"/>
+
+  <!-- Top text: "Writing Collection/Press" replacing コンテンツ001 -->
+  <text x="146" y="152" font-family="var(--site-font), sans-serif" font-size="17" font-weight="600" fill="#222" stroke="none">Writing Collection/Press</text>
+
+  <!-- Large flower (sunflower) -->
+  <!-- Stem -->
+  <path d="M200 395 Q195 350 210 300 Q216 278 210 255" fill="none" stroke-width="2.2"/>
+  <!-- Leaves -->
+  <path d="M198 360 Q170 345 165 370 Q172 382 198 365" fill="none" stroke-width="2"/>
+  <path d="M206 335 Q230 318 240 338 Q230 348 206 340" fill="none" stroke-width="2"/>
+  <!-- Flower center -->
+  <circle cx="210" cy="228" r="22" fill="none" stroke-width="2.2"/>
+  <!-- Petals - 8 large rounded petals -->
+  <ellipse cx="210" cy="192" rx="14" ry="20" fill="none" stroke-width="1.8"/>
+  <ellipse cx="237" cy="201" rx="14" ry="20" fill="none" stroke-width="1.8" transform="rotate(45 237 201)"/>
+  <ellipse cx="246" cy="228" rx="14" ry="20" fill="none" stroke-width="1.8" transform="rotate(90 246 228)"/>
+  <ellipse cx="237" cy="255" rx="14" ry="20" fill="none" stroke-width="1.8" transform="rotate(135 237 255)"/>
+  <ellipse cx="210" cy="264" rx="14" ry="20" fill="none" stroke-width="1.8" transform="rotate(180 210 264)"/>
+  <ellipse cx="183" cy="255" rx="14" ry="20" fill="none" stroke-width="1.8" transform="rotate(225 183 255)"/>
+  <ellipse cx="174" cy="228" rx="14" ry="20" fill="none" stroke-width="1.8" transform="rotate(270 174 228)"/>
+  <ellipse cx="183" cy="201" rx="14" ry="20" fill="none" stroke-width="1.8" transform="rotate(315 183 201)"/>
+
+  <!-- Small flower -->
+  <circle cx="152" cy="348" r="12" fill="none" stroke-width="1.8"/>
+  <ellipse cx="152" cy="326" rx="8" ry="13" fill="none" stroke-width="1.5"/>
+  <ellipse cx="169" cy="333" rx="8" ry="13" fill="none" stroke-width="1.5" transform="rotate(50 169 333)"/>
+  <ellipse cx="174" cy="348" rx="8" ry="13" fill="none" stroke-width="1.5" transform="rotate(90 174 348)"/>
+  <ellipse cx="169" cy="363" rx="8" ry="13" fill="none" stroke-width="1.5" transform="rotate(130 169 363)"/>
+  <ellipse cx="152" cy="370" rx="8" ry="13" fill="none" stroke-width="1.5" transform="rotate(180 152 370)"/>
+  <ellipse cx="135" cy="363" rx="8" ry="13" fill="none" stroke-width="1.5" transform="rotate(230 135 363)"/>
+  <ellipse cx="130" cy="348" rx="8" ry="13" fill="none" stroke-width="1.5" transform="rotate(270 130 348)"/>
+  <ellipse cx="135" cy="333" rx="8" ry="13" fill="none" stroke-width="1.5" transform="rotate(310 135 333)"/>
+  <!-- Small flower stem -->
+  <path d="M152 383 Q149 395 152 410" fill="none" stroke-width="1.8"/>
+
+  <!-- Sparkle stars (4-point diamonds) -->
+  <path d="M130 278 L133 266 L136 278 L148 281 L136 284 L133 296 L130 284 L118 281 Z" fill="none" stroke-width="1.5"/>
+  <path d="M253 198 L255 190 L257 198 L265 200 L257 202 L255 210 L253 202 L245 200 Z" fill="none" stroke-width="1.3"/>
+  <path d="M272 225 L274 219 L276 225 L282 227 L276 229 L274 235 L272 229 L266 227 Z" fill="none" stroke-width="1.3"/>
+  <path d="M112 415 L114 408 L116 415 L123 417 L116 419 L114 426 L112 419 L105 417 Z" fill="none" stroke-width="1.3"/>
+  <path d="M242 185 L243 181 L244 185 L248 186 L244 187 L243 191 L242 187 L238 186 Z" fill="none" stroke-width="1.1"/>
+
+  <!-- Dimension labels -->
+  <text x="238" y="316" font-family="var(--site-font), sans-serif" font-size="15" fill="#222" stroke="none">130C</text>
+  <text x="200" y="425" font-family="var(--site-font), sans-serif" font-size="15" fill="#222" stroke="none">110</text>
+
+  <!-- Cute round character (chibi style, faithful to original) -->
+  <!-- Head - large round -->
+  <circle cx="305" cy="340" r="30" fill="none" stroke-width="2.5"/>
+  <!-- Two dot eyes -->
+  <circle cx="294" cy="334" r="3" fill="#222" stroke="none"/>
+  <circle cx="312" cy="334" r="3" fill="#222" stroke="none"/>
+  <!-- Smile -->
+  <path d="M296 346 Q305 354 314 346" fill="none" stroke-width="2"/>
+  <!-- Round body -->
+  <ellipse cx="305" cy="400" rx="24" ry="32" fill="none" stroke-width="2.2"/>
+  <!-- Left arm (reaching toward heart) -->
+  <path d="M281 390 Q265 400 268 415" fill="none" stroke-width="2"/>
+  <!-- Right arm (reaching toward gift) -->
+  <path d="M329 390 Q340 398 338 415" fill="none" stroke-width="2"/>
+  <!-- Left leg -->
+  <path d="M292 430 Q288 450 284 465" fill="none" stroke-width="2.2"/>
+  <!-- Right leg -->
+  <path d="M318 430 Q322 450 326 465" fill="none" stroke-width="2.2"/>
+
+  <!-- Heart icon (bottom left of character) -->
+  <circle cx="262" cy="488" r="15" fill="none" stroke-width="2"/>
+  <path d="M255 485 Q255 478 262 483 Q269 478 269 485 Q269 492 262 497 Q255 492 255 485" fill="none" stroke-width="1.8"/>
+
+  <!-- Gift icon (bottom right of character) -->
+  <rect x="328" y="480" width="26" height="22" rx="2" fill="none" stroke-width="1.8"/>
+  <rect x="326" y="474" width="30" height="10" rx="2" fill="none" stroke-width="1.8"/>
+  <line x1="341" y1="474" x2="341" y2="502" stroke-width="1.3"/>
+  <path d="M334 474 Q330 464 341 474" fill="none" stroke-width="1.3"/>
+  <path d="M348 474 Q352 464 341 474" fill="none" stroke-width="1.3"/>
+
+  <!-- Bottom bar: "Reid Surmeier" replacing コメントしよう -->
+  <rect x="105" y="492" width="145" height="34" rx="17" fill="none" stroke-width="2.2"/>
+  <text x="120" y="514" font-family="var(--site-font), sans-serif" font-size="15" font-weight="500" fill="#222" stroke="none">Reid Surmeier</text>
+</svg>
