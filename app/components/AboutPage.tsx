@@ -281,27 +281,13 @@ function BouncingImages({ containerRef }: { containerRef: React.RefObject<HTMLDi
 
 
 
-export default function AboutPage({ onClose, lang, onContact, mobile = false }: { onClose: () => void; lang: "en" | "de" | "fr" | "ko" | "id" | "zh" | "ja"; onContact?: () => void; mobile?: boolean }) {
+export default function AboutPage({ onClose, lang, onContact, mobile = false, isPlaying = false, onToggleAudio }: { onClose: () => void; lang: "en" | "de" | "fr" | "ko" | "id" | "zh" | "ja"; onContact?: () => void; mobile?: boolean; isPlaying?: boolean; onToggleAudio?: () => void }) {
   void onClose;
 
-  const audioRef = useRef<HTMLAudioElement>(null);
   const chartSectionRef = useRef<HTMLDivElement>(null);
   const bouncingContainerRef = useRef<HTMLDivElement>(null);
   const bioLeftRef = useRef<HTMLDivElement>(null);
   const bioRightRef = useRef<HTMLDivElement>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-
-  // Try autoplay on mount, stop on unmount
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-    audio.volume = 1;
-    audio.play().catch(() => { /* autoplay blocked by browser */ });
-    return () => {
-      audio.pause();
-      audio.currentTime = 0;
-    };
-  }, []);
   const [subscribed, setSubscribed] = useState(false);
   const [emailValid, setEmailValid] = useState(false);
   const [chartVisible, setChartVisible] = useState(false);
@@ -472,16 +458,7 @@ export default function AboutPage({ onClose, lang, onContact, mobile = false }: 
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
               <button
                 type="button"
-                onClick={() => {
-                  const audio = audioRef.current;
-                  if (!audio) return;
-                  if (audio.paused) {
-                    audio.volume = 1;
-                    audio.play().catch(() => {});
-                  } else {
-                    audio.pause();
-                  }
-                }}
+                onClick={() => onToggleAudio?.()}
                 style={{
                   fontSize: 16,
                   cursor: "pointer",
@@ -500,14 +477,6 @@ export default function AboutPage({ onClose, lang, onContact, mobile = false }: 
               <span style={{ fontSize: 15, color: "#bbb", fontFamily: "'Inter', sans-serif" }}>
                 {"\u266B"} {t.about}
               </span>
-              <audio
-                ref={audioRef}
-                src="/reid_audio.mp3"
-                preload="auto"
-                onPlay={() => setIsPlaying(true)}
-                onPause={() => setIsPlaying(false)}
-                onEnded={() => setIsPlaying(false)}
-              />
             </div>
 
             {/* Bio text — 70/30 two-column grid */}

@@ -774,6 +774,8 @@ export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showContact, setShowContact] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
+  const aboutAudioRef = useRef<HTMLAudioElement>(null);
+  const [aboutAudioPlaying, setAboutAudioPlaying] = useState(false);
   const [showCV, setShowCV] = useState(false);
   const [showInstagram, setShowInstagram] = useState(false);
   const [showGallery, setShowGallery] = useState<string | null>(null);
@@ -820,6 +822,20 @@ export default function Home() {
     }
     prevIsHomeRef.current = isHomePage;
   }, [isHomePage]);
+
+  // Single audio element for about page — autoplay when opened, stop when closed
+  useEffect(() => {
+    const audio = aboutAudioRef.current;
+    if (!audio) return;
+    if (showAbout) {
+      audio.volume = 1;
+      audio.play().catch(() => { /* autoplay blocked */ });
+    } else {
+      audio.pause();
+      audio.currentTime = 0;
+    }
+  }, [showAbout]);
+
   // Header reveals
   const [headerRevealed, setHeaderRevealed] = useState(false);
   const [featuredRevealed, setFeaturedRevealed] = useState(false);
@@ -1753,6 +1769,15 @@ export default function Home() {
 
   return (
     <div className="absolute inset-0 overflow-hidden font-[var(--site-font)] text-[13px] leading-[15px] text-black bg-white md:overflow-hidden overflow-y-auto">
+      {/* Single audio element for about page */}
+      <audio
+        ref={aboutAudioRef}
+        src="/reid_audio.mp3"
+        preload="auto"
+        onPlay={() => setAboutAudioPlaying(true)}
+        onPause={() => setAboutAudioPlaying(false)}
+        onEnded={() => setAboutAudioPlaying(false)}
+      />
       {/* LEFT COLUMN - hidden on mobile, collapsible */}
       <div className="hidden md:block absolute top-0 right-0 h-full pl-[10px] pr-[15px]" style={{ width: sidebarOpen ? 195 : 0, overflow: "hidden", transition: "width 0.7s cubic-bezier(0.25, 0.1, 0.25, 1), opacity 0.6s ease, border-left 0.7s ease", opacity: sidebarOpen ? 1 : 0, borderLeft: sidebarOpen ? "1px solid #ddd" : "1px solid transparent", color: "#ddd" }}>
         {/* Top border line */}
@@ -1840,7 +1865,7 @@ export default function Home() {
         {/* About page view */}
         {showAbout && (
           <div key={`about-${navIndex}`} className="absolute top-[15px] bottom-0 left-0 right-0 overflow-y-auto">
-            <AboutPage onClose={() => navigateTo("home")} lang={lang} onContact={() => navigateTo("contact")} />
+            <AboutPage onClose={() => navigateTo("home")} lang={lang} onContact={() => navigateTo("contact")} isPlaying={aboutAudioPlaying} onToggleAudio={() => { const a = aboutAudioRef.current; if (!a) return; if (a.paused) { a.volume = 1; a.play().catch(() => {}); } else { a.pause(); } }} />
           </div>
         )}
 
@@ -2178,7 +2203,7 @@ export default function Home() {
         {/* Mobile About Page */}
         {showAbout && (
           <div key={`m-about-${navIndex}`} style={{ padding: "20px 15px", minHeight: "60vh" }}>
-            <AboutPage onClose={() => navigateTo("home")} lang={lang} onContact={() => navigateTo("contact")} mobile />
+            <AboutPage onClose={() => navigateTo("home")} lang={lang} onContact={() => navigateTo("contact")} mobile isPlaying={aboutAudioPlaying} onToggleAudio={() => { const a = aboutAudioRef.current; if (!a) return; if (a.paused) { a.volume = 1; a.play().catch(() => {}); } else { a.pause(); } }} />
           </div>
         )}
 
