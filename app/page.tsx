@@ -2121,12 +2121,13 @@ export default function Home() {
 
         {/* Dropdown menu */}
         <div style={{
-          maxHeight: mobileMenuOpen ? 600 : 0,
-          overflow: "hidden",
-          transition: "max-height 0.35s ease",
+          display: "grid",
+          gridTemplateRows: mobileMenuOpen ? "1fr" : "0fr",
+          transition: "grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
           borderBottom: mobileMenuOpen ? "1px solid #eee" : "none",
         }}>
-          <div style={{ padding: "16px 15px", fontFamily: "var(--site-font)", color: "#999" }}>
+          <div style={{ overflow: "hidden", minHeight: 0 }}>
+          <div style={{ padding: "16px 15px", fontFamily: "var(--site-font)", color: "#999", opacity: mobileMenuOpen ? 1 : 0, transition: "opacity 0.3s ease", transitionDelay: mobileMenuOpen ? "0.1s" : "0s" }}>
             <div onClick={() => { scatterAndNavigate("home"); setMobileMenuOpen(false); }}>
               <SidebarLink icons={[{char:"3",shape:"triangle"}]} label={t.homepage} mobileNav />
             </div>
@@ -2163,6 +2164,7 @@ export default function Home() {
               <SidebarLink icons={[{char:"X"}]} label={t.cv} mobileNav />
             </div>
             <div style={{ borderTop: "1px solid #eee", margin: "10px 0", width: "100%" }} />
+          </div>
           </div>
         </div>
 
