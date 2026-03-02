@@ -45,7 +45,7 @@ import EmbedPage from "./components/EmbedPage";
 import InstagramPage from "./components/InstagramPage";
 import GalleryPage from "./components/GalleryPage";
 
-// Grey-themed FPS/MS stats panel for sidebar
+// Grey-themed FPS/MS stats panel for sidebar — auto-scaling graphs
 function SidebarStats() {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -72,21 +72,32 @@ function SidebarStats() {
       ctx.font = `500 ${9 * PR}px TestPitchSans,sans-serif`;
       ctx.textBaseline = "top";
       ctx.fillStyle = "#ccc"; ctx.fillText(label, TX, TY);
-      let min = Infinity, max = 0;
+      let allMin = Infinity, allMax = 0;
       const history: number[] = [];
       return {
         wrapper, canvas, ctx, fg,
-        update(value: number, maxValue: number) {
-          min = Math.min(min, value); max = Math.max(max, value);
+        update(value: number) {
+          allMin = Math.min(allMin, value); allMax = Math.max(allMax, value);
           history.push(value);
           if (history.length > maxPoints) history.shift();
 
-          // Clear everything
+          // Auto-scale: compute min/max from visible history
+          let hMin = Infinity, hMax = -Infinity;
+          for (const v of history) {
+            if (v < hMin) hMin = v;
+            if (v > hMax) hMax = v;
+          }
+          const range = hMax - hMin || 1;
+          const scaleMin = hMin - range * 0.15;
+          const scaleMax = hMax + range * 0.15;
+          const scaleRange = scaleMax - scaleMin;
+
+          // Clear
           ctx.clearRect(0, 0, W, H);
 
           // Text
           ctx.fillStyle = "#ccc"; ctx.globalAlpha = 1;
-          ctx.fillText(`${Math.round(value)} ${label} (${Math.round(min)}-${Math.round(max)})`, TX, TY);
+          ctx.fillText(`${Math.round(value)} ${label} (${Math.round(allMin)}-${Math.round(allMax)})`, TX, TY);
 
           // Line graph
           if (history.length > 1) {
@@ -94,7 +105,7 @@ function SidebarStats() {
             ctx.beginPath();
             for (let i = 0; i < history.length; i++) {
               const x = GX + (maxPoints - history.length + i) * step;
-              const y = GY + GH - (history[i] / maxValue) * GH;
+              const y = GY + GH - ((history[i] - scaleMin) / scaleRange) * GH;
               if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
             }
             ctx.strokeStyle = fg;
@@ -124,27 +135,30 @@ function SidebarStats() {
     el.appendChild(kb.wrapper);
 
     let beginTime = performance.now(), prevTime = beginTime, frames = 0;
+    let lastTotalKB = 0;
     let rafId: number;
 
     const loop = () => {
       const now = performance.now();
       frames++;
 
-      ms.update(now - beginTime, 200);
+      ms.update(now - beginTime);
       beginTime = now;
 
       if (now >= prevTime + 1000) {
         // RAF — animation callbacks per second
-        raf.update((frames * 1000) / (now - prevTime), 120);
+        raf.update((frames * 1000) / (now - prevTime));
 
-        // KB loaded — total transfer size of all resources (cross-browser)
+        // KB/s — transfer rate since last tick (cross-browser)
         const entries = performance.getEntriesByType("resource") as PerformanceResourceTiming[];
         let totalKB = 0;
         for (const e of entries) {
           totalKB += (e.transferSize || 0);
         }
         totalKB /= 1024;
-        kb.update(totalKB, Math.max(totalKB * 1.2, 500));
+        const deltaKB = totalKB - lastTotalKB;
+        lastTotalKB = totalKB;
+        kb.update(deltaKB);
 
         prevTime = now; frames = 0;
       }
