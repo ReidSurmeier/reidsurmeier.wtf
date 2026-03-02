@@ -117,11 +117,11 @@ function SidebarStats() {
 
     const raf = makePanel("RAF", "#D5F0C5");
     const ms = makePanel("MS", colors[1]);
-    const mb = makePanel("MB", colors[2]);
+    const kb = makePanel("KB", colors[2]);
 
     el.appendChild(raf.wrapper);
     el.appendChild(ms.wrapper);
-    el.appendChild(mb.wrapper);
+    el.appendChild(kb.wrapper);
 
     let beginTime = performance.now(), prevTime = beginTime, frames = 0;
     let rafId: number;
@@ -137,10 +137,14 @@ function SidebarStats() {
         // RAF — animation callbacks per second
         raf.update((frames * 1000) / (now - prevTime), 120);
 
-        if ((performance as unknown as { memory?: { usedJSHeapSize: number; jsHeapSizeLimit: number } }).memory) {
-          const mem = (performance as unknown as { memory: { usedJSHeapSize: number; jsHeapSizeLimit: number } }).memory;
-          mb.update(mem.usedJSHeapSize / 1048576, mem.jsHeapSizeLimit / 1048576);
+        // KB loaded — total transfer size of all resources (cross-browser)
+        const entries = performance.getEntriesByType("resource") as PerformanceResourceTiming[];
+        let totalKB = 0;
+        for (const e of entries) {
+          totalKB += (e.transferSize || 0);
         }
+        totalKB /= 1024;
+        kb.update(totalKB, Math.max(totalKB * 1.2, 500));
 
         prevTime = now; frames = 0;
       }
