@@ -2178,7 +2178,7 @@ export default function Home() {
         {/* Mobile About Page */}
         {showAbout && (
           <div key={`m-about-${navIndex}`} style={{ padding: "20px 15px", minHeight: "60vh" }}>
-            <AboutPage onClose={() => navigateTo("home")} lang={lang} onContact={() => navigateTo("contact")} />
+            <AboutPage onClose={() => navigateTo("home")} lang={lang} onContact={() => navigateTo("contact")} mobile />
           </div>
         )}
 

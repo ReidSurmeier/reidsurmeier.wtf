@@ -413,6 +413,13 @@ function ExhibitionPage({ lang, images, captions, aboutTexts, processImages, bou
       const connectDist = 120; // px — distance to form a new connection
       const disconnectDist = 180; // px — distance to break an existing connection (hysteresis)
 
+      // Set correct DOM widths before reading sizes (React state update is async)
+      itemEls.forEach((el) => {
+        const elSrc = el.querySelector("img")?.getAttribute("src") || "";
+        const elSize = elSrc.includes("iu%5Bp") ? imgSize * 2 : elSrc.includes("6c20fd1a") ? imgSize * 0.4 : imgSize;
+        el.style.width = elSize + "px";
+      });
+
       const sizes = itemEls.map((el) => ({
         w: el.offsetWidth || imgSize,
         h: el.offsetHeight || imgSize,

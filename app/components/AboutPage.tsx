@@ -281,7 +281,7 @@ function BouncingImages({ containerRef }: { containerRef: React.RefObject<HTMLDi
 
 
 
-export default function AboutPage({ onClose, lang, onContact }: { onClose: () => void; lang: "en" | "de" | "fr" | "ko" | "id" | "zh" | "ja"; onContact?: () => void }) {
+export default function AboutPage({ onClose, lang, onContact, mobile = false }: { onClose: () => void; lang: "en" | "de" | "fr" | "ko" | "id" | "zh" | "ja"; onContact?: () => void; mobile?: boolean }) {
   void onClose;
 
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -452,6 +452,7 @@ export default function AboutPage({ onClose, lang, onContact }: { onClose: () =>
       `}</style>
 
       {/* ─── Section A: Header Bar ─── */}
+      {!mobile && (
       <div
         style={{
           display: "flex",
@@ -471,6 +472,7 @@ export default function AboutPage({ onClose, lang, onContact }: { onClose: () =>
         <span style={{ color: "#ddd", fontSize: 10 }}>|</span>
         <a href="https://reidsurmeier.wtf" style={{ color: "#bbb", textDecoration: "none", fontSize: 10, whiteSpace: "nowrap" }}>reidsurmeier.wtf</a>
       </div>
+      )}
 
       {/* ─── Scrollable content ─── */}
       <div
