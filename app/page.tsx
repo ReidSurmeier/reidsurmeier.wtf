@@ -940,7 +940,7 @@ export default function Home() {
     const a = navClickRef.current;
     if (!a) return;
     a.currentTime = 0;
-    a.volume = 0.45;
+    a.volume = 0.15;
     a.play().catch(() => {});
   }, []);
 
