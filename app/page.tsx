@@ -1773,6 +1773,7 @@ export default function Home() {
 
   const handleTileClick = useCallback(
     (tile: TileData, section: "txt" | "img") => {
+      playNavClick();
       setActiveTile(tile);
       setActiveSection(section);
       // Start off-screen, then animate in
@@ -1783,7 +1784,7 @@ export default function Home() {
         });
       });
     },
-    []
+    [playNavClick]
   );
 
   const handleHover = useCallback((text: string, title?: string) => {
@@ -2072,7 +2073,7 @@ export default function Home() {
 
           <div style={{ height: 80 }} />
           <div style={{ marginRight: 100 }}>
-            <BookCovers onHover={handleHover} onLeave={handleLeave} coverRefs={{ 0: cover0Ref, 1: cover1Ref, 2: cover2Ref, 3: cover3Ref, 4: cover4Ref, 5: cover5Ref, 6: cover6Ref, 7: cover7Ref, 8: cover8Ref, 9: cover9Ref, 10: cover10Ref }} onAllVisible={() => { setCoversReady(true); hasPlayedIntroRef.current = true; }} onCoverHover={handleCoverHoverLine} onCoverClick={(idx) => { if (idx <= 4) navigateTo("prints"); else if (idx <= 7) navigateTo("instagram"); else if (idx <= 9) navigateTo("painting"); else if (idx === 10) navigateTo("about"); }} connectedIndices={connectedCoverIndices} visible={isHomePage} skipIntro={hasPlayedIntroRef.current} onBounceStart={() => { isBouncingRef.current = true; if (activeRedrawRef.current) { clearLines(); activeRedrawRef.current(true); } }} onBounceFrame={() => { suppressDisconnectedError(() => { if (leaderLinesRef.current.length > 0) { leaderLinesRef.current.forEach((line) => { try { line.position?.(); } catch { /* */ } }); } const W = window as any; if (W._starLine) { try { W._starLine.position(); } catch {} } if (W._coverLine) { try { W._coverLine.position(); } catch {} } }); }} captions={{ plotter: t.capPlotter, sketchbook: t.capSketchbook, press: t.capPress, painting: t.capPainting, about: t.capAbout }} />
+            <BookCovers onHover={handleHover} onLeave={handleLeave} coverRefs={{ 0: cover0Ref, 1: cover1Ref, 2: cover2Ref, 3: cover3Ref, 4: cover4Ref, 5: cover5Ref, 6: cover6Ref, 7: cover7Ref, 8: cover8Ref, 9: cover9Ref, 10: cover10Ref }} onAllVisible={() => { setCoversReady(true); hasPlayedIntroRef.current = true; }} onCoverHover={handleCoverHoverLine} onCoverClick={(idx) => { playNavClick(); if (idx <= 4) navigateTo("prints"); else if (idx <= 7) navigateTo("instagram"); else if (idx <= 9) navigateTo("painting"); else if (idx === 10) navigateTo("about"); }} connectedIndices={connectedCoverIndices} visible={isHomePage} skipIntro={hasPlayedIntroRef.current} onBounceStart={() => { isBouncingRef.current = true; if (activeRedrawRef.current) { clearLines(); activeRedrawRef.current(true); } }} onBounceFrame={() => { suppressDisconnectedError(() => { if (leaderLinesRef.current.length > 0) { leaderLinesRef.current.forEach((line) => { try { line.position?.(); } catch { /* */ } }); } const W = window as any; if (W._starLine) { try { W._starLine.position(); } catch {} } if (W._coverLine) { try { W._coverLine.position(); } catch {} } }); }} captions={{ plotter: t.capPlotter, sketchbook: t.capSketchbook, press: t.capPress, painting: t.capPainting, about: t.capAbout }} />
           </div>
 
           <div style={{ height: 180 }} />
@@ -2306,7 +2307,7 @@ export default function Home() {
 
         {/* Book covers */}
         <div style={{ padding: "0 15px", marginBottom: 40, display: showContact || showAbout || showCV || showGallery ? "none" : undefined, opacity: featuredRevealed ? 1 : 0, transition: "opacity 0.8s ease 0.2s" }}>
-          <BookCovers onHover={handleHover} onLeave={handleLeave} onAllVisible={() => { setCoversReady(true); hasPlayedIntroRef.current = true; }} onCoverClick={(idx) => { if (idx <= 4) navigateTo("prints"); else if (idx <= 7) window.open("https://www.instagram.com/reidsurmeier/", "_blank"); else if (idx <= 9) navigateTo("painting"); else if (idx === 10) navigateTo("about"); }} visible={isHomePage} skipIntro={hasPlayedIntroRef.current} captions={{ plotter: t.capPlotter, sketchbook: t.capSketchbook, press: t.capPress, painting: t.capPainting, about: t.capAbout }} />
+          <BookCovers onHover={handleHover} onLeave={handleLeave} onAllVisible={() => { setCoversReady(true); hasPlayedIntroRef.current = true; }} onCoverClick={(idx) => { playNavClick(); if (idx <= 4) navigateTo("prints"); else if (idx <= 7) window.open("https://www.instagram.com/reidsurmeier/", "_blank"); else if (idx <= 9) navigateTo("painting"); else if (idx === 10) navigateTo("about"); }} visible={isHomePage} skipIntro={hasPlayedIntroRef.current} captions={{ plotter: t.capPlotter, sketchbook: t.capSketchbook, press: t.capPress, painting: t.capPainting, about: t.capAbout }} />
         </div>
 
         {/* TXT and IMG removed */}
