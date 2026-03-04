@@ -803,6 +803,7 @@ export default function Home() {
   const [showContact, setShowContact] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
   const aboutAudioRef = useRef<HTMLAudioElement>(null);
+  const navClickRef = useRef<HTMLAudioElement>(null);
   const [aboutAudioPlaying, setAboutAudioPlaying] = useState(false);
   const [showCV, setShowCV] = useState(false);
   const [showInstagram, setShowInstagram] = useState(false);
@@ -935,7 +936,16 @@ export default function Home() {
   }, [navIndex, applyPage]);
 
   // Scatter all visible content then navigate (Locomotive-style transition)
+  const playNavClick = useCallback(() => {
+    const a = navClickRef.current;
+    if (!a) return;
+    a.currentTime = 0;
+    a.volume = 0.45;
+    a.play().catch(() => {});
+  }, []);
+
   const scatterAndNavigate = useCallback((page: string) => {
+    playNavClick();
     // Clear leader lines immediately
     drawTimersRef.current.forEach((t) => clearTimeout(t));
     drawTimersRef.current = [];
@@ -981,7 +991,7 @@ export default function Home() {
       });
       navigateTo(page);
     }, 500);
-  }, [navigateTo]);
+  }, [navigateTo, playNavClick]);
 
   // Go back
   const navBack = useCallback(() => {
@@ -1797,6 +1807,8 @@ export default function Home() {
 
   return (
     <div className="absolute inset-0 overflow-hidden font-[var(--site-font)] text-[13px] leading-[15px] text-black bg-white md:overflow-hidden overflow-y-auto">
+      {/* Nav click sound */}
+      <audio ref={navClickRef} src="/nav-click.wav" preload="auto" />
       {/* Single audio element for about page */}
       <audio
         ref={aboutAudioRef}
@@ -1825,7 +1837,7 @@ export default function Home() {
             <div onClick={() => scatterAndNavigate("painting")}>
               <SidebarLink ref={paintingRef} icons={[{char:"C"}]} label={t.painting} typeDelay={800} hideLabel={!sidebarOpen} highlighted={highlightedCategory === "painting"} dimmed={activeCoverIdx !== null && highlightedCategory !== "painting"} onMouseEnter={handlePaintingEnter} onMouseLeave={handlePaintingLeave} marquee={marqueeSidebarIdx === 2} />
             </div>
-            <div onClick={() => window.open("https://substack.com/@reidsurmeier/posts", "_blank")}>
+            <div onClick={() => { playNavClick(); window.open("https://substack.com/@reidsurmeier/posts", "_blank"); }}>
               <SidebarLink ref={writingRef} icons={[{char:"L"},{char:"3",shape:"triangle"}]} label={t.writing} typeDelay={1400} hideLabel={!sidebarOpen} onMouseEnter={handleWritingEnter} onMouseLeave={handleWritingLeave} marquee={marqueeSidebarIdx === 4} />
             </div>
             {sidebarOpen && <AnimatedDivider delay={1550} />}
@@ -1857,7 +1869,7 @@ export default function Home() {
 
         {/* Barcode + Headline — bottom of sidebar */}
         <div className="absolute bottom-[8px]" style={{ fontSize: 11, fontFamily: "var(--site-font)", color: "#ddd", left: 15, right: 15 }}>
-          <SidebarStats />
+          <div className="sidebar-stats-wrapper"><SidebarStats /></div>
           <div style={{ overflow: "hidden", whiteSpace: "nowrap" }}>
             <span className="marquee-text">
               {"\u00A9 2026 Reid Surmeier\u2003\u2003\u2003HTML last updated \u2192 02/15/2026\u2003\u2003\u2003\u00A9 2026 Reid Surmeier\u2003\u2003\u2003HTML last updated \u2192 02/15/2026"}
@@ -2191,7 +2203,7 @@ export default function Home() {
             <div onClick={() => { scatterAndNavigate("painting"); setMobileMenuOpen(false); }}>
               <SidebarLink icons={[{char:"C"}]} label={t.painting} mobileNav />
             </div>
-            <div onClick={() => { window.open("https://substack.com/@reidsurmeier/posts", "_blank"); setMobileMenuOpen(false); }}>
+            <div onClick={() => { playNavClick(); window.open("https://substack.com/@reidsurmeier/posts", "_blank"); setMobileMenuOpen(false); }}>
               <SidebarLink icons={[{char:"L"},{char:"3",shape:"triangle"}]} label={t.writing} mobileNav />
             </div>
             <div style={{ borderTop: "1px solid #eee", margin: "10px 0", width: "100%" }} />
@@ -2203,10 +2215,10 @@ export default function Home() {
               <SidebarLink icons={[{char:"Y"}]} label={t.lectures} mobileNav />
             </div>}
             <div style={{ borderTop: "1px solid #eee", margin: "10px 0", width: "100%" }} />
-            <div onClick={() => { window.open("https://www.instagram.com/reidsurmeier/", "_blank"); setMobileMenuOpen(false); }}>
+            <div onClick={() => { playNavClick(); window.open("https://www.instagram.com/reidsurmeier/", "_blank"); setMobileMenuOpen(false); }}>
               <SidebarLink icons={[{char:"Q"}]} label={t.social} mobileNav />
             </div>
-            <div onClick={() => { window.open("https://www.are.na/reid-surmeier/channels", "_blank"); setMobileMenuOpen(false); }}>
+            <div onClick={() => { playNavClick(); window.open("https://www.are.na/reid-surmeier/channels", "_blank"); setMobileMenuOpen(false); }}>
               <SidebarLink icons={[{char:"A"}]} label="Are.na" mobileNav />
             </div>
             <div onClick={() => { window.open("https://www.reidsurmeier.garden/", "_blank"); setMobileMenuOpen(false); }}>

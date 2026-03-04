@@ -232,4 +232,10 @@ h1, h2, h3, h4, p {
     width: 0 !important;
     height: 0 !important;
   }
+
+@media (max-height: 650px) {
+  .sidebar-stats-wrapper {
+    display: none;
+  }
+}
 }
